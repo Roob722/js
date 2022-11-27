@@ -21,7 +21,8 @@
 #### 那么现在已经理清楚sign生成规则了，直接扣js代码
 
 
-```function L(e, t) {
+```
+function L(e, t) {
         var n = e[0]
           , r = e[1]
           , o = e[2]
@@ -146,7 +147,7 @@
     }
       function J(e, t) {
         return e + t & 4294967295
-    }
+    } //javascript
     ```
 
    
