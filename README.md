@@ -93,7 +93,7 @@ function L(e, t) {
         e[2] = J(o, e[2]),
         e[3] = J(i, e[3])
     } 
-```javascript
+
  function z(e, t, n, r, o, i) {
         return t = J(J(t, e), J(r, i)),
         J(t << o | t >>> 32 - o, n)
@@ -122,7 +122,7 @@ function L(e, t) {
             t += G[e >> 8 * n + 4 & 15] + G[e >> 8 * n & 15];
         return t
     }
-    ```javascript
+
     function K(e) {
         return function(e) {
             for (var t = 0; t < e.length; t++)
@@ -146,7 +146,7 @@ function L(e, t) {
             r
         }(e))
     }
-    ```javascript
+
       function J(e, t) {
         return e + t & 4294967295
     } 
