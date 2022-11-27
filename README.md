@@ -21,8 +21,7 @@
 #### 那么现在已经理清楚sign生成规则了，直接扣js代码
 
 
-```
-function L(e, t) {
+```function L(e, t) {
         var n = e[0]
           , r = e[1]
           , o = e[2]
@@ -92,8 +91,8 @@ function L(e, t) {
         e[1] = J(r, e[1]),
         e[2] = J(o, e[2]),
         e[3] = J(i, e[3])
-    }
-
+    } //javascript
+```
  function z(e, t, n, r, o, i) {
         return t = J(J(t, e), J(r, i)),
         J(t << o | t >>> 32 - o, n)
