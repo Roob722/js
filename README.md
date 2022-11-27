@@ -92,8 +92,8 @@ function L(e, t) {
         e[1] = J(r, e[1]),
         e[2] = J(o, e[2]),
         e[3] = J(i, e[3])
-    } //javascript
-```
+    } 
+```javascript
  function z(e, t, n, r, o, i) {
         return t = J(J(t, e), J(r, i)),
         J(t << o | t >>> 32 - o, n)
@@ -122,6 +122,7 @@ function L(e, t) {
             t += G[e >> 8 * n + 4 & 15] + G[e >> 8 * n & 15];
         return t
     }
+    ```javascript
     function K(e) {
         return function(e) {
             for (var t = 0; t < e.length; t++)
@@ -145,10 +146,11 @@ function L(e, t) {
             r
         }(e))
     }
+    ```javascript
       function J(e, t) {
         return e + t & 4294967295
-    } //javascript
-    ```
+    } 
+
 
    
 - python写个函数来调用上面的js，到这里sign参数生成出来了，经过与目标网站比对，同样时间戳生成出来的签名完全一致![](http://106.53.156.248:33979/img/22.png)  
