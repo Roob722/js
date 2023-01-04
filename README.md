@@ -1,28 +1,28 @@
 ## 心血来潮，突然想在git上记录一些东西，写一些教程，希望能帮助到有需要的人，下面记录一次Js逆向拼多多旗下社群团购sign：签名 分析加密过程
 #### 前段时间接到一个客户的需求，他希望全自动把商品发布到某社群团购平台，商品是全品类，意思就是不管吃的、喝的、穿的、只要他有的全部往上发布....
 #### 好了，废话不多说直接上图
-- 先传个商品，看看往服务器提交了什么参数![先传个商品，看看往服务器提交了什么参数](http://106.53.156.248:33979/img/1.png)  
-- 找到提交参数的请求![找到提交参数的请求](http://106.53.156.248:33979/img/3.png)  
-- 看一下请求由哪些参数组成![看一下请求由哪些参数组成](http://106.53.156.248:33979/img/4.png)  
-- 直接用python模拟提交，很显然服务器验证失败了，接下来要检查一下哪些字段是每次请求都会变动的![直接用python模拟提交，很显然服务器验证失败了，接下来要检查一下哪些字段是每次请求都会变动的](http://106.53.156.248:33979/img/5.png)  
-- 发现一共有4个参数提交商品的时候每次都不一样，这次主要逆向这个sign参数![发现一共有4个参数提交商品的时候每次都不一样，这次主要逆向这个sign参数](http://106.53.156.248:33979/img/6.png)  
-- 找到该请求的调用的js文件，直接搜索参数名称![找到该请求的调用的js文件，直接搜索参数名称](http://106.53.156.248:33979/img/8.png)  
-- 很容易看出来sign由函数K生成出来的![很容易看出来sign由函数K生成出来的](http://106.53.156.248:33979/img/9.png)  
-- 找到函数K![找到函数K](http://106.53.156.248:33979/img/10.png)  
-- 发现函数K里面又调用了其他函数q,V,L![发现函数K里面又调用了其他函数q,V,L](http://106.53.156.248:33979/img/11.png)  
-- 接着往下找，先找函数q，函数q只做了简单的字符串运算改变，先不管它，接着往下找![接着往下找，先找函数q，函数q只做了简单的字符串运算改变，先不管它，接着往下找](http://106.53.156.248:33979/img/12.png)  
-- 找到函数V，先记住位置![找到函数V，先记住位置](http://106.53.156.248:33979/img/13.png)  
-- 找到函数L  ![找到函数L](http://106.53.156.248:33979/img/14.png)  
+- 先传个商品，看看往服务器提交了什么参数![先传个商品，看看往服务器提交了什么参数](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/1.png)  
+- 找到提交参数的请求![找到提交参数的请求](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/3.png)  
+- 看一下请求由哪些参数组成![看一下请求由哪些参数组成](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/4.png)  
+- 直接用python模拟提交，很显然服务器验证失败了，接下来要检查一下哪些字段是每次请求都会变动的![直接用python模拟提交，很显然服务器验证失败了，接下来要检查一下哪些字段是每次请求都会变动的](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/5.png)  
+- 发现一共有4个参数提交商品的时候每次都不一样，这次主要逆向这个sign参数![发现一共有4个参数提交商品的时候每次都不一样，这次主要逆向这个sign参数](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/6.png)  
+- 找到该请求的调用的js文件，直接搜索参数名称![找到该请求的调用的js文件，直接搜索参数名称](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/8.png)  
+- 很容易看出来sign由函数K生成出来的![很容易看出来sign由函数K生成出来的](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/9.png)  
+- 找到函数K![找到函数K](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/10.png)  
+- 发现函数K里面又调用了其他函数q,V,L![发现函数K里面又调用了其他函数q,V,L](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/11.png)  
+- 接着往下找，先找函数q，函数q只做了简单的字符串运算改变，先不管它，接着往下找![接着往下找，先找函数q，函数q只做了简单的字符串运算改变，先不管它，接着往下找](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/12.png)  
+- 找到函数V，先记住位置![找到函数V，先记住位置](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/13.png)  
+- 找到函数L  ![找到函数L](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/14.png)  
 - 我们再回到最初的地方
 
-- 函数K里面的参数由变量f，c，p 三个不固定参数组成![函数K里面的参数由变量f，c，p 三个不固定参数组成](http://106.53.156.248:33979/img/16.png)
-- f变量取的用户id倒数4位![f变量取的用户id倒数4位](http://106.53.156.248:33979/img/15.png)
-- c变量取的13位时间戳![c变量取的13位时间戳](http://106.53.156.248:33979/img/19.png)
-- 而P变量经过反复对比，取的是本次所请求的地址后缀![而P变量经过反复对比，取的是本次所请求的地址后缀](http://106.53.156.248:33979/img/18.png)
+- 函数K里面的参数由变量f，c，p 三个不固定参数组成![函数K里面的参数由变量f，c，p 三个不固定参数组成](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/16.png)
+- f变量取的用户id倒数4位![f变量取的用户id倒数4位](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/15.png)
+- c变量取的13位时间戳![c变量取的13位时间戳](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/19.png)
+- 而P变量经过反复对比，取的是本次所请求的地址后缀![而P变量经过反复对比，取的是本次所请求的地址后缀](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/18.png)
 
 - 那么现在已经理清楚sign生成规则了，直接扣js代码
 
-- python写个函数来调用下面的js，到这里sign参数生成出来了，经过与目标网站比对，同样时间戳生成出来的签名完全一致![图片](http://106.53.156.248:33979/img/23.png)<br>
+- python写个函数来调用下面的js，到这里sign参数生成出来了，经过与目标网站比对，同样时间戳生成出来的签名完全一致![图片](http://yungengxin.oss-cn-beijing.aliyuncs.com/pdd/23.png)<br>
 
 ```javascript
 function L(e, t) {
